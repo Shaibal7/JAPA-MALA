@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japa Counter</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap">
+    <audio id="clickSound" preload="auto">
+        <source src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" type="audio/mpeg">
+    </audio>
+</head>
+<body>
+    <div class="mantras"></div>
+    <div class="lotus-overlay"></div>
+    
+    <div class="counter">
+        <div class="spiritual-symbols">
+            <span class="symbol">॥</span>
+            <span class="symbol">ॐ</span>
+            <span class="symbol">॥</span>
+        </div>
+        <h1>|| JAPA MALA ||</h1>
+        <h2>Hare Krishna! Start Your Chanting</h2>
+        
+        <div class="stats">
+            <div>Round: <span id="round">0</span></div>
+            <div>Beads: <span id="count">0</span>/108</div>
+        </div>
+
+        <div class="mala-container">
+            <div class="mala-beads">
+                <!-- JavaScript will populate this with 108 beads -->
+                <script>
+                    for(let i = 0; i < 108; i++) {
+                        document.write(`<div class="mala-bead" style="--i: ${i}"><div class="bead-shine"></div></div>`);
+                    }
+                </script>
+            </div>
+            <div class="meru-bead">
+                <button onclick="decrementCount()" class="decrement-btn" aria-label="Decrement counter">
+                    <span class="btn-icon">-</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="target-section">
+            <div class="target-header">
+                <span class="target-icon">🎯</span>
+                <label for="dailyTarget">Daily Target Rounds:</label>
+            </div>
+            <input type="number" id="dailyTarget" min="1" value="16" aria-label="Set daily target rounds">
+            <div class="progress-text">
+                <span class="progress-label">Progress:</span>
+                <span class="progress-numbers">
+                    <span id="progress">0</span>/<span id="targetDisplay">16</span>
+                </span>
+                <span class="progress-label">rounds</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="incrementCount()" aria-label="Increment counter" class="primary-btn">
+                <span class="btn-text">Chant</span>
+                <span class="btn-icon">🕉</span>
+            </button>
+            <button onclick="confirmReset()" aria-label="Reset counter" class="reset-btn">
+                <span class="btn-text">Reset</span>
+                <span class="btn-icon">↺</span>
+            </button>
+        </div>
+        
+        <p class="hint">(Press spacebar to count)</p>
+        
+        <div class="mantra-text">
+            <div class="mantra-line">
+                HARE KRISHNA HARE KRISHNA KRISHNA KRISHNA HARE HARE
+            </div>
+            <div class="mantra-line">
+                HARE RAMA HARE RAMA RAMA RAMA HARE HARE
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,425 @@
+/* Base styles */
+:root {
+    --primary-color: #FF9933;
+    --text-color: #333;
+    --bead-color: #8B4513;
+    --bead-active: #A0522D;
+    --bead-shine: rgba(255, 255, 255, 0.15);
+    --lotus-pink: rgba(255, 182, 193, 0.25);
+}
+
+body {
+    background: #fff8f8;
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Simple Lotus Pattern */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="lotusGradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FFB6C1;stop-opacity:0.35"/><stop offset="100%" style="stop-color:%23FFC0CB;stop-opacity:0.25"/></linearGradient></defs><g transform="translate(50 50)"><path d="M0,-5 C10,-15 15,-20 15,-15 C15,-10 10,-5 0,0 C-10,-5 -15,-10 -15,-15 C-15,-20 -10,-15 0,-5" fill="url(%23lotusGradient)" transform="rotate(0)"/><path d="M0,-5 C10,-15 15,-20 15,-15 C15,-10 10,-5 0,0 C-10,-5 -15,-10 -15,-15 C-15,-20 -10,-15 0,-5" fill="url(%23lotusGradient)" transform="rotate(72)"/><path d="M0,-5 C10,-15 15,-20 15,-15 C15,-10 10,-5 0,0 C-10,-5 -15,-10 -15,-15 C-15,-20 -10,-15 0,-5" fill="url(%23lotusGradient)" transform="rotate(144)"/><path d="M0,-5 C10,-15 15,-20 15,-15 C15,-10 10,-5 0,0 C-10,-5 -15,-10 -15,-15 C-15,-20 -10,-15 0,-5" fill="url(%23lotusGradient)" transform="rotate(216)"/><path d="M0,-5 C10,-15 15,-20 15,-15 C15,-10 10,-5 0,0 C-10,-5 -15,-10 -15,-15 C-15,-20 -10,-15 0,-5" fill="url(%23lotusGradient)" transform="rotate(288)"/><circle cx="0" cy="0" r="2" fill="%23FFE4E1" opacity="0.4"/></g></svg>');
+    background-size: 180px 180px;
+    background-position: 30px 30px;
+    background-repeat: space;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Remove second lotus layer */
+body::after {
+    display: none;
+}
+
+/* Main container */
+.counter {
+    background: rgba(255, 255, 255, 0.98);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Simplified Typography */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: normal;
+}
+
+/* Enhanced Realistic Mala Beads */
+.mala-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 2rem auto;
+}
+
+.mala-beads {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: gentleSway 3s ease-in-out infinite;
+}
+
+.mala-bead {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 35% 35%,
+        var(--bead-color) 0%,
+        #4A2410 85%,
+        #3A1C0C 100%
+    );
+    transform-origin: 150px 150px;
+    transform: rotate(calc(360deg / 108 * var(--i))) translateX(120px);
+    transition: all 0.3s ease;
+    box-shadow: 
+        inset -2px -2px 6px rgba(0, 0, 0, 0.4),
+        inset 3px 3px 6px var(--bead-shine),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mala-bead::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 20%;
+    height: 20%;
+    background: var(--bead-shine);
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+.mala-bead::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: 20%;
+    width: 15%;
+    height: 15%;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+.mala-bead.active {
+    background: radial-gradient(
+        circle at 35% 35%,
+        var(--bead-active) 0%,
+        #5C2E14 85%,
+        #4A2410 100%
+    );
+    transform: rotate(calc(360deg / 108 * var(--i))) translateX(120px) scale(1.15);
+    box-shadow: 
+        inset -3px -3px 7px rgba(0, 0, 0, 0.5),
+        inset 4px 4px 7px var(--bead-shine),
+        0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Meru bead (the counter bead) */
+.meru-bead {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 35% 35%,
+        #DAA520 0%,
+        #B8860B 85%,
+        #8B6914 100%
+    );
+    transform: translate(-50%, -50%);
+    box-shadow: 
+        inset -3px -3px 7px rgba(0, 0, 0, 0.4),
+        inset 4px 4px 7px rgba(255, 255, 255, 0.2),
+        0 3px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.meru-bead::before {
+    width: 25%;
+    height: 25%;
+    top: 20%;
+    left: 20%;
+}
+
+/* Realistic bead animations */
+@keyframes gentleSway {
+    0%, 100% {
+        transform: rotate(-0.5deg);
+    }
+    50% {
+        transform: rotate(0.5deg);
+    }
+}
+
+@keyframes beadPulse {
+    0% {
+        transform: rotate(calc(360deg / 108 * var(--i))) translateX(120px) scale(1);
+    }
+    50% {
+        transform: rotate(calc(360deg / 108 * var(--i))) translateX(120px) scale(1.2);
+    }
+    100% {
+        transform: rotate(calc(360deg / 108 * var(--i))) translateX(120px) scale(1);
+    }
+}
+
+/* Simple Stats Display */
+.stats {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.stats div {
+    margin: 0.5rem 0;
+}
+
+/* Simple Controls */
+.controls {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+
+.primary-btn, .reset-btn {
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.primary-btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.reset-btn {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.primary-btn:hover {
+    background: #E88A2D;
+}
+
+.reset-btn:hover {
+    background: #eee;
+}
+
+/* Simple hint text */
+.hint {
+    color: #888;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .counter {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .mala-container {
+        width: 260px;
+        height: 260px;
+    }
+
+    .mala-bead {
+        width: 16px;
+        height: 16px;
+        transform-origin: 130px 130px;
+        transform: rotate(calc(360deg / 108 * var(--i))) translateX(100px);
+    }
+
+    .mantra-word {
+        font-size: 1.4rem;
+        padding: 0.3rem 0.6rem;
+    }
+}
+
+/* Progress Ring */
+.progress-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    display: none; /* Hide the progress ring for now */
+}
+
+.progress-ring-circle-bg {
+    fill: none;
+    stroke: rgba(255, 153, 51, 0.1);
+    stroke-width: 4;
+}
+
+.progress-ring-circle {
+    fill: none;
+    stroke: url(#gradient);
+    stroke-width: 4;
+    stroke-linecap: round;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.progress-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+/* Decrement button in Meru bead */
+.decrement-btn {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.decrement-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* Target completion celebration */
+.target-complete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.target-complete-content {
+    text-align: center;
+    padding: 2rem;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    animation: scaleIn 0.5s ease-out;
+}
+
+.target-complete h3 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.target-complete p {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Simple Mantra Text */
+.mantra-text {
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    font-family: 'Playfair Display', serif;
+    line-height: 1.6;
+}
+
+.mantra-line {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.mantra-word {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    display: inline;
+    padding: 0 0.5rem;
+    font-weight: 500;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .mantra-text {
+        padding: 1.5rem;
+        margin: 2rem 0;
+    }
+
+    .mantra-word {
+        font-size: 1.4rem;
+        padding: 0 0.3rem;
+    }
+}
+
